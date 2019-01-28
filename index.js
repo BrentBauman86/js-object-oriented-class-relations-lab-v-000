@@ -1,0 +1,47 @@
+
+let store = { drivers: [], passengers: [], trips: []}
+
+let driverId = 0
+let passengerId = 0
+let tripId = 0 
+
+
+class Driver {
+    constructor(name){
+    this.name = name
+    this.id = ++driverId  
+    
+    store.drivers.push(this);
+  }
+  trips() {
+      return store.trips.filter(function(trip){
+          return trip.driverId === this.id;
+      }.bind(this) 
+    );
+  }
+
+  passengers() {
+      return store.passengers.filter(function(passenger){
+        return passenger.driverId === this.id;
+        }.bind(this)
+      });
+   }
+}
+
+class Passenger {
+    constructor(name) {
+    this.name = name 
+    this.id = ++passengerId
+    
+    store.passengers.push(this);
+  }
+}
+
+class Trip {
+    constructor(driverId, passengerId){
+        this.pid = ++passengerId;  
+        this.did = ++driverId;
+
+        store.trips.push(this);
+    } 
+}
